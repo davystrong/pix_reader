@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:pix_reader/generator_homepage.dart';
 
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
         useMaterial3: true,
       ),
-      home: Platform.isAndroid || Platform.isIOS
+      home: kIsWeb || Platform.isAndroid || Platform.isIOS
           ? const ScannerHomePage()
           : const GeneratorHomePage(),
     );
