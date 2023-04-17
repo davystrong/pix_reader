@@ -136,7 +136,6 @@ class _ScannerHomePageState extends State<ScannerHomePage> {
           Expanded(
             child: Material(
               child: AnimatedList(
-                clipBehavior: Clip.none,
                 key: listKey,
                 initialItemCount: 0,
                 itemBuilder: (context, index, animation) =>
