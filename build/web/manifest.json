@@ -1,6 +1,6 @@
 {
-    "name": "pix_reader",
-    "short_name": "pix_reader",
+    "name": "Pix Checkout",
+    "short_name": "Pix Checkout",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
