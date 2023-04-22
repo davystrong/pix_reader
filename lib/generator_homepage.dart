@@ -11,9 +11,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pix_reader/ans_formatter.dart';
 import 'package:pix_reader/pix_code.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'main.dart';
 import 'download.dart' if (dart.library.html) 'download_web.dart';
@@ -73,10 +75,20 @@ class _PixEditorState extends ConsumerState<PixEditor> {
   final messageController = TextEditingController();
   final cityController = TextEditingController();
   final cepController = TextEditingController();
+  final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
+  void restoreValues() async {
+    final prefs = await this.prefs;
+    pixIdController.text = prefs.getString('pixId') ?? '';
+    nameController.text = prefs.getString('name') ?? '';
+    cityController.text = prefs.getString('city') ?? '';
+    cepController.text = prefs.getString('cep') ?? '';
+  }
 
   @override
   void initState() {
     super.initState();
+    restoreValues();
     ref.read(pixCodeProvider.notifier).addListener((pixCode) {
       if (pixCode != null && pixCodeController.text != pixCode.serialise()) {
         pixCodeController.text = pixCode.serialise();
@@ -108,19 +120,23 @@ class _PixEditorState extends ConsumerState<PixEditor> {
         }
       }
     });
-  }
 
-  static String removeAccents(String str) {
-    var withDia =
-        'ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüÑñŠšŸÿýŽž';
-    var withoutDia =
-        'AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuNnSsYyyZz';
-
-    for (int i = 0; i < withDia.length; i++) {
-      str = str.replaceAll(withDia[i], withoutDia[i]);
-    }
-
-    return str;
+    pixIdController.addListener(() async {
+      final prefs = await this.prefs;
+      prefs.setString('pixId', pixIdController.text);
+    });
+    nameController.addListener(() async {
+      final prefs = await this.prefs;
+      prefs.setString('name', nameController.text);
+    });
+    cityController.addListener(() async {
+      final prefs = await this.prefs;
+      prefs.setString('city', cityController.text);
+    });
+    cepController.addListener(() async {
+      final prefs = await this.prefs;
+      prefs.setString('cep', cepController.text);
+    });
   }
 
   @override
@@ -171,20 +187,20 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                   .replaceFirst(',', '.')
                   .replaceAll(RegExp(r'[^.0-9]'), ''));
 
-              var city = removeAccents(cityController.text)
-                  .toUpperCase()
-                  .replaceAll(RegExp(r'[^A-Z ]'), '');
+              // var city = removeAccents(cityController.text)
+              //     .replaceAll(RegExp(r'[^A-Z ]'), '');
+              // cityController.
 
               var cep = cepController.text.replaceAll(RegExp(r'[^0-9]'), '');
 
               if (pixIdController.text.isNotEmpty &&
                   nameController.text.isNotEmpty &&
-                  city.isNotEmpty) {
+                  cityController.text.isNotEmpty) {
                 ref.read(pixCodeProvider.notifier).state = PixCode(
                   pixId: pixIdController.text,
                   value: value,
                   name: nameController.text,
-                  city: city,
+                  city: cityController.text,
                   cep: cep,
                   message: messageController.text,
                   referenceLabel: referenceLabelController.text,
@@ -227,6 +243,7 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  inputFormatters: [ANSFormatter()],
                   maxLength: 25,
                   controller: nameController,
                   decoration: const InputDecoration(
@@ -243,12 +260,13 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  inputFormatters: [ANSFormatter()],
                   maxLength: 15,
                   controller: cityController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     label: Text('City'),
-                    hintText: 'e.g. SAO PAULO',
+                    hintText: 'e.g. Sao Paulo',
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -279,6 +297,7 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  inputFormatters: [ANSFormatter()],
                   controller: referenceLabelController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -288,6 +307,7 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  inputFormatters: [ANSFormatter()],
                   controller: messageController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
