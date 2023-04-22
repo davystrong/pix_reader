@@ -82,13 +82,27 @@ class _PixEditorState extends ConsumerState<PixEditor> {
         pixCodeController.text = pixCode.serialise();
       }
       if (pixCode != null) {
-        pixIdController.text = pixCode.pixId;
+        // Had to check for each one because of a bug on web: any letter that was
+        // typed caused all text in the field to be selected
+        if (pixIdController.text != pixCode.pixId) {
+          pixIdController.text = pixCode.pixId;
+        }
         valueController.text = 'R\$ ${pixCode.value.toStringAsFixed(2)}';
-        nameController.text = pixCode.name;
-        referenceLabelController.text = pixCode.referenceLabel;
-        messageController.text = pixCode.message ?? '';
-        cityController.text = pixCode.city;
-        cepController.text = pixCode.cep;
+        if (nameController.text != pixCode.name) {
+          nameController.text = pixCode.name;
+        }
+        if (referenceLabelController.text != pixCode.referenceLabel) {
+          referenceLabelController.text = pixCode.referenceLabel;
+        }
+        if (messageController.text != pixCode.message) {
+          messageController.text = pixCode.message ?? '';
+        }
+        if (cityController.text != pixCode.city) {
+          cityController.text = pixCode.city;
+        }
+        if (cepController.text != pixCode.cep) {
+          cepController.text = pixCode.cep;
+        }
       }
     });
   }
