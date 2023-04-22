@@ -31,8 +31,11 @@ class PixCode {
     required this.city,
     required this.cep,
     String? referenceLabel,
-    this.message,
-  }) : referenceLabel = referenceLabel ?? _generateRandomString(20);
+    String? message,
+  })  : referenceLabel = referenceLabel == null || referenceLabel.isEmpty
+            ? _generateRandomString(20)
+            : referenceLabel,
+        message = message == null || message.isEmpty ? null : message;
 
   // Note: Should be printed in hex
   static int _crc16(String data) {
@@ -86,7 +89,7 @@ class PixCode {
         '61${_stdLength(cep)}$cep'
         '62${_stdLength(nestedUID)}$nestedUID'
         '6304';
-    output += _crc16(output).toRadixString(16).padLeft(4, '0');
+    output += _crc16(output).toRadixString(16).padLeft(4, '0').toUpperCase();
     return output;
   }
 
@@ -111,8 +114,8 @@ class PixCode {
       }
       var nestedAccountInfo = _getFields(fields[26]!);
       var nestedUID = _getFields(fields[62]!);
-      if (!nestedAccountInfo.containsKey(1) ||
-          !nestedAccountInfo.containsKey(2) ||
+      if (!nestedAccountInfo.containsKey(0) ||
+          !nestedAccountInfo.containsKey(1) ||
           !nestedUID.containsKey(5)) {
         throw InvalidPixCode();
       }
@@ -130,7 +133,6 @@ class PixCode {
     }
   }
 
-  @override
   PixCode operator +(PixCode rhs) {
     if (name != rhs.name ||
         pixId != rhs.pixId ||
@@ -139,11 +141,12 @@ class PixCode {
       throw IncompatiblePixCodes();
     }
     return PixCode(
-        pixId: pixId,
-        value: value + rhs.value,
-        name: name,
-        city: city,
-        cep: cep);
+      pixId: pixId,
+      value: value + rhs.value,
+      name: name,
+      city: city,
+      cep: cep,
+    );
   }
 
   @override

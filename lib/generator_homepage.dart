@@ -171,8 +171,12 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                   name: nameController.text,
                   city: city,
                   cep: cep,
-                  message: messageController.text,
-                  referenceLabel: referenceLabelController.text,
+                  message: messageController.text.isEmpty
+                      ? null
+                      : messageController.text,
+                  referenceLabel: referenceLabelController.text.isEmpty
+                      ? null
+                      : referenceLabelController.text,
                 );
               } else {
                 ref.read(pixCodeProvider.notifier).state = null;
