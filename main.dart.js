@@ -5968,14 +5968,12 @@ return B.bS.pY(a)},
 lS:function lS(){},
 a6V:function a6V(a,b){this.c=a
 this.d=b},
-ar7(){var s=document
-s.toString
-return s},
+ar7(){return document},
 auV(a,b){var s={}
 s.type=b
 return new self.Blob(a,s)},
 aAS(a,b){var s
-for(s=J.as(b);s.v();)a.appendChild(s.gE(s)).toString},
+for(s=J.as(b);s.v();)a.appendChild(s.gE(s))},
 aAU(a,b){return!1},
 aAT(a){var s=a.firstElementChild
 if(s==null)throw A.c(A.ag("No elements"))
@@ -6130,26 +6128,19 @@ SR:function SR(){},
 SS:function SS(){},
 ST:function ST(){},
 SU:function SU(){},
-aqj(a){var s,r,q
+aqj(a){var s,r
 if(a==null)return a
 if(typeof a=="string"||typeof a=="number"||A.i8(a))return a
 if(A.aER(a))return A.fK(a)
-s=Array.isArray(a)
-s.toString
-if(s){r=[]
-q=0
-while(!0){s=a.length
-s.toString
-if(!(q<s))break
-r.push(A.aqj(a[q]));++q}return r}return a},
-fK(a){var s,r,q,p,o,n
+if(Array.isArray(a)){s=[]
+for(r=0;r<a.length;++r)s.push(A.aqj(a[r]))
+return s}return a},
+fK(a){var s,r,q,p,o
 if(a==null)return null
 s=A.y(t.N,t.z)
 r=Object.getOwnPropertyNames(a)
 for(q=r.length,p=0;p<r.length;r.length===q||(0,A.I)(r),++p){o=r[p]
-n=o
-n.toString
-s.n(0,n,A.aqj(a[o]))}return s},
+s.n(0,o,A.aqj(a[o]))}return s},
 aqi(a){var s
 if(a==null)return a
 if(typeof a=="string"||typeof a=="number"||A.i8(a))return a
@@ -6160,11 +6151,8 @@ a=s}return a},
 akz(a){var s={}
 J.fL(a,new A.agE(s))
 return s},
-aER(a){var s=Object.getPrototypeOf(a),r=s===Object.prototype
-r.toString
-if(!r){r=s===null
-r.toString}else r=!0
-return r},
+aER(a){var s=Object.getPrototypeOf(a)
+return s===Object.prototype||s===null},
 afB:function afB(a){this.a=a},
 agE:function agE(a){this.a=a},
 FB:function FB(a,b){this.a=a
@@ -23329,7 +23317,7 @@ n.defer=!1
 n.crossOrigin="anonymous"
 n.type="text/javascript"
 n.src="https://unpkg.com/@zxing/library@0.19.1"
-k.head.appendChild(n).toString
+k.head.appendChild(n)
 k=new A.zU(n,"load",!1,t.rE)
 s=5
 return A.a0(k.gK(k),$async$ahc)
@@ -33781,13 +33769,9 @@ A.ap.prototype={}
 A.Dg.prototype={
 gt(a){return a.length}}
 A.Do.prototype={
-k(a){var s=String(a)
-s.toString
-return s}}
+k(a){return String(a)}}
 A.Dt.prototype={
-k(a){var s=String(a)
-s.toString
-return s}}
+k(a){return String(a)}}
 A.kX.prototype={$ikX:1}
 A.ip.prototype={
 gt(a){return a.length}}
@@ -33795,9 +33779,7 @@ A.EB.prototype={
 gt(a){return a.length}}
 A.bV.prototype={$ibV:1}
 A.px.prototype={
-gt(a){var s=a.length
-s.toString
-return s}}
+gt(a){return a.length}}
 A.VL.prototype={}
 A.el.prototype={}
 A.hk.prototype={}
@@ -33807,34 +33789,22 @@ A.ED.prototype={
 gt(a){return a.length}}
 A.ER.prototype={
 gt(a){return a.length},
-h(a,b){var s=a[b]
-s.toString
-return s}}
+h(a,b){return a[b]}}
 A.lb.prototype={$ilb:1}
 A.Fa.prototype={
-k(a){var s=String(a)
-s.toString
-return s}}
+k(a){return String(a)}}
 A.v5.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -33877,25 +33847,17 @@ s.toString
 return s},
 $ihH:1}
 A.Fc.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -33903,17 +33865,15 @@ $ibf:1,
 $ij:1,
 $iB:1}
 A.Fe.prototype={
-gt(a){var s=a.length
-s.toString
-return s}}
+gt(a){return a.length}}
 A.Lv.prototype={
 q(a,b){return J.tS(this.b,b)},
 ga0(a){return this.a.firstElementChild==null},
 gt(a){return this.b.length},
 h(a,b){return t.lU.a(this.b[b])},
-n(a,b,c){this.a.replaceChild(c,this.b[b]).toString},
+n(a,b,c){this.a.replaceChild(c,this.b[b])},
 st(a,b){throw A.c(A.Z("Cannot resize element lists"))},
-F(a,b){this.a.appendChild(b).toString
+F(a,b){this.a.appendChild(b)
 return b},
 ga4(a){var s=this.eX(this)
 return new J.hh(s,s.length)},
@@ -33921,22 +33881,18 @@ M(a,b){A.aAS(this.a,b)},
 B(a,b){return A.aAU(this.a,b)},
 U(a){J.alw(this.a)},
 dT(a){var s=this.ga2(this)
-this.a.removeChild(s).toString
+this.a.removeChild(s)
 return s},
 gK(a){return A.aAT(this.a)},
 ga2(a){var s=this.a.lastElementChild
 if(s==null)throw A.c(A.ag("No elements"))
 return s}}
 A.bD.prototype={
-gdi(a){var s=a.children
-s.toString
-return new A.Lv(a,s)},
+gdi(a){return new A.Lv(a,a.children)},
 sdi(a,b){var s=A.a(b.slice(0),A.a3(b)),r=this.gdi(a)
 r.U(0)
 r.M(0,s)},
-k(a){var s=a.localName
-s.toString
-return s},
+k(a){return a.localName},
 $ibD:1}
 A.ac.prototype={$iac:1}
 A.a_.prototype={
@@ -33945,25 +33901,17 @@ a_3(a,b,c,d){return a.addEventListener(b,A.mu(c,1),!1)},
 a1O(a,b,c,d){return a.removeEventListener(b,A.mu(c,1),!1)}}
 A.fc.prototype={$ifc:1}
 A.Fz.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -33976,29 +33924,19 @@ A.FP.prototype={
 gt(a){return a.length}}
 A.fe.prototype={$ife:1}
 A.G0.prototype={
-gt(a){var s=a.length
-s.toString
-return s}}
+gt(a){return a.length}}
 A.nd.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34007,9 +33945,7 @@ $ij:1,
 $iB:1}
 A.q0.prototype={$iq0:1}
 A.GG.prototype={
-k(a){var s=String(a)
-s.toString
-return s}}
+k(a){return String(a)}}
 A.GY.prototype={
 gt(a){return a.length}}
 A.nz.prototype={$inz:1}
@@ -34017,29 +33953,19 @@ A.jV.prototype={$ijV:1}
 A.H1.prototype={
 ai(a,b){return A.fK(a.get(b))!=null},
 h(a,b){return A.fK(a.get(b))},
-a3(a,b){var s,r,q=a.entries()
-for(;!0;){s=q.next()
-r=s.done
-r.toString
-if(r)return
-r=s.value[0]
-r.toString
-b.$2(r,A.fK(s.value[1]))}},
+a3(a,b){var s,r=a.entries()
+for(;!0;){s=r.next()
+if(s.done)return
+b.$2(s.value[0],A.fK(s.value[1]))}},
 gbE(a){var s=A.a([],t.s)
 this.a3(a,new A.a0j(s))
 return s},
 gaQ(a){var s=A.a([],t.n4)
 this.a3(a,new A.a0k(s))
 return s},
-gt(a){var s=a.size
-s.toString
-return s},
-ga0(a){var s=a.size
-s.toString
-return s===0},
-gbI(a){var s=a.size
-s.toString
-return s!==0},
+gt(a){return a.size},
+ga0(a){return a.size===0},
+gbI(a){return a.size!==0},
 n(a,b,c){throw A.c(A.Z("Not supported"))},
 bu(a,b,c){throw A.c(A.Z("Not supported"))},
 B(a,b){throw A.c(A.Z("Not supported"))},
@@ -34053,29 +33979,19 @@ $S:23}
 A.H2.prototype={
 ai(a,b){return A.fK(a.get(b))!=null},
 h(a,b){return A.fK(a.get(b))},
-a3(a,b){var s,r,q=a.entries()
-for(;!0;){s=q.next()
-r=s.done
-r.toString
-if(r)return
-r=s.value[0]
-r.toString
-b.$2(r,A.fK(s.value[1]))}},
+a3(a,b){var s,r=a.entries()
+for(;!0;){s=r.next()
+if(s.done)return
+b.$2(s.value[0],A.fK(s.value[1]))}},
 gbE(a){var s=A.a([],t.s)
 this.a3(a,new A.a0l(s))
 return s},
 gaQ(a){var s=A.a([],t.n4)
 this.a3(a,new A.a0m(s))
 return s},
-gt(a){var s=a.size
-s.toString
-return s},
-ga0(a){var s=a.size
-s.toString
-return s===0},
-gbI(a){var s=a.size
-s.toString
-return s!==0},
+gt(a){return a.size},
+ga0(a){return a.size===0},
+gbI(a){return a.size!==0},
 n(a,b,c){throw A.c(A.Z("Not supported"))},
 bu(a,b,c){throw A.c(A.Z("Not supported"))},
 B(a,b){throw A.c(A.Z("Not supported"))},
@@ -34088,25 +34004,17 @@ $2(a,b){return this.a.push(b)},
 $S:23}
 A.fm.prototype={$ifm:1}
 A.H3.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34120,13 +34028,13 @@ return s},
 ga2(a){var s=this.a.lastChild
 if(s==null)throw A.c(A.ag("No elements"))
 return s},
-F(a,b){this.a.appendChild(b).toString},
+F(a,b){this.a.appendChild(b)},
 dT(a){var s=this.ga2(this)
-this.a.removeChild(s).toString
+this.a.removeChild(s)
 return s},
 B(a,b){return!1},
 n(a,b,c){var s=this.a
-s.replaceChild(c,s.childNodes[b]).toString},
+s.replaceChild(c,s.childNodes[b])},
 ga4(a){var s=this.a.childNodes
 return new A.vq(s,s.length)},
 gt(a){return this.a.childNodes.length},
@@ -34134,40 +34042,30 @@ st(a,b){throw A.c(A.Z("Cannot set length on immutable List."))},
 h(a,b){return this.a.childNodes[b]}}
 A.aX.prototype={
 dS(a){var s=a.parentNode
-if(s!=null)s.removeChild(a).toString},
+if(s!=null)s.removeChild(a)},
 ac6(a,b){var s,r,q
 try{r=a.parentNode
 r.toString
 s=r
 J.au4(s,b,a)}catch(q){}return a},
 Vn(a){var s
-for(;s=a.firstChild,s!=null;)a.removeChild(s).toString},
+for(;s=a.firstChild,s!=null;)a.removeChild(s)},
 k(a){var s=a.nodeValue
 return s==null?this.QI(a):s},
-a1S(a,b,c){var s=a.replaceChild(b,c)
-s.toString
-return s},
+a1S(a,b,c){return a.replaceChild(b,c)},
 $iaX:1}
 A.wL.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34178,25 +34076,17 @@ A.fq.prototype={
 gt(a){return a.length},
 $ifq:1}
 A.HV.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34206,29 +34096,19 @@ $iB:1}
 A.IT.prototype={
 ai(a,b){return A.fK(a.get(b))!=null},
 h(a,b){return A.fK(a.get(b))},
-a3(a,b){var s,r,q=a.entries()
-for(;!0;){s=q.next()
-r=s.done
-r.toString
-if(r)return
-r=s.value[0]
-r.toString
-b.$2(r,A.fK(s.value[1]))}},
+a3(a,b){var s,r=a.entries()
+for(;!0;){s=r.next()
+if(s.done)return
+b.$2(s.value[0],A.fK(s.value[1]))}},
 gbE(a){var s=A.a([],t.s)
 this.a3(a,new A.a3V(s))
 return s},
 gaQ(a){var s=A.a([],t.n4)
 this.a3(a,new A.a3W(s))
 return s},
-gt(a){var s=a.size
-s.toString
-return s},
-ga0(a){var s=a.size
-s.toString
-return s===0},
-gbI(a){var s=a.size
-s.toString
-return s!==0},
+gt(a){return a.size},
+ga0(a){return a.size===0},
+gbI(a){return a.size!==0},
 n(a,b,c){throw A.c(A.Z("Not supported"))},
 bu(a,b,c){throw A.c(A.Z("Not supported"))},
 B(a,b){throw A.c(A.Z("Not supported"))},
@@ -34243,25 +34123,17 @@ A.J8.prototype={
 gt(a){return a.length}}
 A.fv.prototype={$ifv:1}
 A.JA.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34270,25 +34142,17 @@ $ij:1,
 $iB:1}
 A.fw.prototype={$ifw:1}
 A.JB.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34323,9 +34187,7 @@ return s},
 gaQ(a){var s=A.a([],t.s)
 this.a3(a,new A.a5N(s))
 return s},
-gt(a){var s=a.length
-s.toString
-return s},
+gt(a){return a.length},
 ga0(a){return a.key(0)==null},
 gbI(a){return a.key(0)!=null},
 $iaO:1}
@@ -34339,25 +34201,17 @@ A.et.prototype={$iet:1}
 A.fB.prototype={$ifB:1}
 A.ew.prototype={$iew:1}
 A.K6.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34365,25 +34219,17 @@ $ibf:1,
 $ij:1,
 $iB:1}
 A.K7.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34391,30 +34237,20 @@ $ibf:1,
 $ij:1,
 $iB:1}
 A.Kb.prototype={
-gt(a){var s=a.length
-s.toString
-return s}}
+gt(a){return a.length}}
 A.fC.prototype={$ifC:1}
 A.Kh.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34424,33 +34260,23 @@ $iB:1}
 A.Ki.prototype={
 gt(a){return a.length}}
 A.Kv.prototype={
-k(a){var s=String(a)
-s.toString
-return s}}
+k(a){return String(a)}}
 A.KC.prototype={
 gt(a){return a.length}}
 A.op.prototype={$iop:1}
 A.ja.prototype={$ija:1}
 A.LX.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34499,12 +34325,9 @@ gci(a){var s=a.width
 s.toString
 return s}}
 A.N7.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
 return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
@@ -34520,25 +34343,17 @@ $ibf:1,
 $ij:1,
 $iB:1}
 A.Ay.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34546,25 +34361,17 @@ $ibf:1,
 $ij:1,
 $iB:1}
 A.QK.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34572,25 +34379,17 @@ $ibf:1,
 $ij:1,
 $iB:1}
 A.QW.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length,r=b>>>0!==b||b>=s
-r.toString
-if(r)throw A.c(A.cz(b,s,a,null,null))
-s=a[b]
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){var s=a.length
+if(b>>>0!==b||b>=s)throw A.c(A.cz(b,s,a,null,null))
+return a[b]},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s
-if(a.length>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
-ga2(a){var s,r=a.length
-if(r>0){s=a[r-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
+ga2(a){var s=a.length
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return a[b]},
 $ib9:1,
 $iQ:1,
@@ -34696,9 +34495,9 @@ st(a,b){var s=J.bk(this.gjI().a)
 if(b>=s)return
 else if(b<0)throw A.c(A.bl("Invalid list length",null))
 this.CZ(0,b,s)},
-F(a,b){this.b.a.appendChild(b).toString},
+F(a,b){this.b.a.appendChild(b)},
 M(a,b){var s,r
-for(s=J.as(b),r=this.b.a;s.v();)r.appendChild(s.gE(s)).toString},
+for(s=J.as(b),r=this.b.a;s.v();)r.appendChild(s.gE(s))},
 q(a,b){if(!t.lU.b(b))return!1
 return b.parentNode===this.a},
 CZ(a,b,c){var s=this.gjI()
@@ -34829,58 +34628,32 @@ aaE(a){if(a<=0||a>4294967296)throw A.c(A.ao7("max must be in range 0 < max \u226
 return Math.random()*a>>>0}}
 A.hu.prototype={$ihu:1}
 A.Gw.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length
-s.toString
-s=b>>>0!==b||b>=s
-s.toString
-if(s)throw A.c(A.cz(b,this.gt(a),a,null,null))
-s=a.getItem(b)
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){if(b>>>0!==b||b>=a.length)throw A.c(A.cz(b,this.gt(a),a,null,null))
+return a.getItem(b)},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s=a.length
-s.toString
-if(s>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
 ga2(a){var s=a.length
-s.toString
-if(s>0){s=a[s-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return this.h(a,b)},
 $iQ:1,
 $ij:1,
 $iB:1}
 A.hB.prototype={$ihB:1}
 A.Hr.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length
-s.toString
-s=b>>>0!==b||b>=s
-s.toString
-if(s)throw A.c(A.cz(b,this.gt(a),a,null,null))
-s=a.getItem(b)
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){if(b>>>0!==b||b>=a.length)throw A.c(A.cz(b,this.gt(a),a,null,null))
+return a.getItem(b)},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s=a.length
-s.toString
-if(s>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
 ga2(a){var s=a.length
-s.toString
-if(s>0){s=a[s-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return this.h(a,b)},
 $iQ:1,
 $ij:1,
@@ -34888,29 +34661,16 @@ $iB:1}
 A.HW.prototype={
 gt(a){return a.length}}
 A.JK.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length
-s.toString
-s=b>>>0!==b||b>=s
-s.toString
-if(s)throw A.c(A.cz(b,this.gt(a),a,null,null))
-s=a.getItem(b)
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){if(b>>>0!==b||b>=a.length)throw A.c(A.cz(b,this.gt(a),a,null,null))
+return a.getItem(b)},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s=a.length
-s.toString
-if(s>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
 ga2(a){var s=a.length
-s.toString
-if(s>0){s=a[s-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return this.h(a,b)},
 $iQ:1,
 $ij:1,
@@ -34919,29 +34679,16 @@ A.ao.prototype={
 gdi(a){return new A.FB(a,new A.Lt(a))}}
 A.hV.prototype={$ihV:1}
 A.Kj.prototype={
-gt(a){var s=a.length
-s.toString
-return s},
-h(a,b){var s=a.length
-s.toString
-s=b>>>0!==b||b>=s
-s.toString
-if(s)throw A.c(A.cz(b,this.gt(a),a,null,null))
-s=a.getItem(b)
-s.toString
-return s},
+gt(a){return a.length},
+h(a,b){if(b>>>0!==b||b>=a.length)throw A.c(A.cz(b,this.gt(a),a,null,null))
+return a.getItem(b)},
 n(a,b,c){throw A.c(A.Z("Cannot assign element of immutable List."))},
 st(a,b){throw A.c(A.Z("Cannot resize immutable List."))},
-gK(a){var s=a.length
-s.toString
-if(s>0){s=a[0]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+gK(a){if(a.length>0)return a[0]
+throw A.c(A.ag("No elements"))},
 ga2(a){var s=a.length
-s.toString
-if(s>0){s=a[s-1]
-s.toString
-return s}throw A.c(A.ag("No elements"))},
+if(s>0)return a[s-1]
+throw A.c(A.ag("No elements"))},
 aW(a,b){return this.h(a,b)},
 $iQ:1,
 $ij:1,
@@ -35403,29 +35150,19 @@ gt(a){return a.length}}
 A.DA.prototype={
 ai(a,b){return A.fK(a.get(b))!=null},
 h(a,b){return A.fK(a.get(b))},
-a3(a,b){var s,r,q=a.entries()
-for(;!0;){s=q.next()
-r=s.done
-r.toString
-if(r)return
-r=s.value[0]
-r.toString
-b.$2(r,A.fK(s.value[1]))}},
+a3(a,b){var s,r=a.entries()
+for(;!0;){s=r.next()
+if(s.done)return
+b.$2(s.value[0],A.fK(s.value[1]))}},
 gbE(a){var s=A.a([],t.s)
 this.a3(a,new A.Ud(s))
 return s},
 gaQ(a){var s=A.a([],t.n4)
 this.a3(a,new A.Ue(s))
 return s},
-gt(a){var s=a.size
-s.toString
-return s},
-ga0(a){var s=a.size
-s.toString
-return s===0},
-gbI(a){var s=a.size
-s.toString
-return s!==0},
+gt(a){return a.size},
+ga0(a){return a.size===0},
+gbI(a){return a.size!==0},
 n(a,b,c){throw A.c(A.Z("Not supported"))},
 bu(a,b,c){throw A.c(A.Z("Not supported"))},
 B(a,b){throw A.c(A.Z("Not supported"))},
@@ -70439,12 +70176,8 @@ case 3:s=5
 return A.a0(h.nk(),$async$ml)
 case 5:k=a2
 c=$.jr().q5$
-h=c.videoWidth
-h.toString
-c=c.videoHeight
-c.toString
-g=t.z
-q=A.aq(["ViewID",i,"videoWidth",h,"videoHeight",c,"torchable",k],g,g)
+h=t.z
+q=A.aq(["ViewID",i,"videoWidth",c.videoWidth,"videoHeight",c.videoHeight,"torchable",k],h,h)
 s=1
 break
 case 4:p=7
@@ -70465,13 +70198,9 @@ return A.a0($.jr().nk(),$async$ml)
 case 11:k=a2
 if(k&&c.ai(a0,"torch"))$.jr().nW(A.jm(c.h(a0,"torch")))
 c=$.jr().q5$
-h=c.videoWidth
-h.toString
-c=c.videoHeight
-c.toString
-g=t.z
-g=A.aq(["ViewID",i,"videoWidth",h,"videoHeight",c,"torchable",k],g,g)
-q=g
+h=t.z
+h=A.aq(["ViewID",i,"videoWidth",c.videoWidth,"videoHeight",c.videoHeight,"torchable",k],h,h)
+q=h
 s=1
 break
 p=2
@@ -70805,9 +70534,7 @@ o=A.aq(["video",{facingMode:m}],t.N,t.z)}else o=A.aq(["video",!0],t.N,t.z)
 m=window.navigator.mediaDevices
 if(m==null)m=null
 else{n=A.akz(o)
-m=m.getUserMedia(n)
-m.toString
-m=A.jq(m,t.Qy)}s=3
+m=A.jq(m.getUserMedia(n),t.Qy)}s=3
 return A.a0(m,$async$vD)
 case 3:q=c
 s=1
@@ -70817,9 +70544,7 @@ return A.U($async$vD,r)},
 ce(a){var s=0,r=A.V(t.H),q=this,p,o,n
 var $async$ce=A.W(function(b,c){if(b===1)return A.S(c,r)
 while(true)switch(s){case 0:try{o=q.nb$
-if(o!=null){o=o.getTracks()
-o.toString
-J.fL(o,new A.a_c())}}catch(m){p=A.a7(m)
+if(o!=null)J.fL(o.getTracks(),new A.a_c())}catch(m){p=A.a7(m)
 A.oQ().$1("Failed to stop stream: "+A.l(p))}q.q5$.srcObject=null
 q.nb$=null
 B.kz.sdi(q.b,A.a([],t.CE))
@@ -70829,14 +70554,11 @@ A.a_c.prototype={
 $1(a){if(a.readyState==="live")a.stop()},
 $S:441}
 A.a_d.prototype={
-r8(){var s=0,r=A.V(t.yp),q,p=2,o,n=this,m,l,k,j,i,h,g,f
+r8(){var s=0,r=A.V(t.yp),q,p=2,o,n=this,m,l,k,j,i,h,g
 var $async$r8=A.W(function(a,b){if(a===1){o=b
 s=p}while(true)switch(s){case 0:p=4
 i=n.nb$
-if(i==null)h=null
-else{i=i.getVideoTracks()
-i.toString
-h=i}m=h
+m=i==null?null:i.getVideoTracks()
 s=m!=null?7:8
 break
 case 7:i=J.kR(m)
@@ -70851,7 +70573,7 @@ break}case 8:p=2
 s=6
 break
 case 4:p=3
-f=o
+g=o
 s=6
 break
 case 3:s=2
@@ -70880,17 +70602,12 @@ return A.a0(q.nk(),$async$nW)
 case 4:s=c?2:3
 break
 case 2:p=q.nb$
-if(p==null)o=null
-else{p=p.getVideoTracks()
-p.toString
-o=p}if(o==null)p=null
+o=p==null?null:p.getVideoTracks()
+if(o==null)p=null
 else{p=B.c.gK(o)
 n=t.z
 m=A.akz(A.aq(["advanced",A.a([A.aq(["torch",a],t.N,t.y)],t.uu)],n,n))
-p=p.applyConstraints(m)
-p.toString
-n=A.jq(p,n)
-p=n}s=5
+p=A.jq(p.applyConstraints(m),n)}s=5
 return A.a0(p,$async$nW)
 case 5:case 3:return A.T(null,r)}})
 return A.U($async$nW,r)}}
@@ -70933,10 +70650,8 @@ if(p!=null)p.videoElement=b
 p=q.c
 if(p!=null)p.stream=a
 q.nb$=a
-p=b.play()
-p.toString
 s=2
-return A.a0(A.jq(p,t.z),$async$uk)
+return A.a0(A.jq(b.play(),t.z),$async$uk)
 case 2:return A.T(null,r)}})
 return A.U($async$uk,r)},
 a76(){var s=A.aoN(null,t._O)
@@ -78726,12 +78441,9 @@ c=j[1]
 i=j[2]
 h=[400*d/(d+27.13),400*c/(c+27.13),400*i/(i+27.13)]
 return new A.a7A(l,(40*h[0]+20*h[1]+h[2])/20*k,k,k,a1,1,q,m,A.D1(m,0.25),1.48+e)})
-s($,"aGX","al2",()=>{var q=A.ar7().createElement("div")
-q.toString
-return q})
-r($,"aGW","jr",()=>{var q=$.al2(),p=A.ar7().createElement("video")
-p.toString
-return new A.a7K(null,p,B.M,q)})
+s($,"aGX","al2",()=>A.ar7().createElement("div"))
+r($,"aGW","jr",()=>{var q=$.al2()
+return new A.a7K(null,A.ar7().createElement("video"),B.M,q)})
 s($,"aKr","au_",()=>A.amd($.D8()))
 s($,"aK0","alo",()=>new A.Ev(t.P1.a($.ahI()),null))
 s($,"aHr","asd",()=>new A.I_(A.bq("/",!0,!1,!1),A.bq("[^/]$",!0,!1,!1),A.bq("^/",!0,!1,!1)))
@@ -78806,3 +78518,4 @@ a(b.target)}for(var r=0;r<s.length;++r)s[r].addEventListener("load",onLoad,false
 var s=A.ahe
 if(typeof dartMainRunner==="function")dartMainRunner(s,[])
 else s([])})})()
+//# sourceMappingURL=main.dart.js.map
