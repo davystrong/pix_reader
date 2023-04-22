@@ -66,14 +66,13 @@ class _PixEditorState extends ConsumerState<PixEditor> {
   var formKey = GlobalKey<FormState>();
 
   var pixCodeController = TextEditingController();
-  var pixIdController = TextEditingController(text: 'asdasd');
-  var valueController =
-      MoneyMaskedTextController(leftSymbol: 'R\$ ', initialValue: 4.50);
-  var nameController = TextEditingController(text: 'asdasd');
+  var pixIdController = TextEditingController();
+  var valueController = MoneyMaskedTextController(leftSymbol: 'R\$ ');
+  var nameController = TextEditingController();
   var referenceLabelController = TextEditingController();
   var messageController = TextEditingController();
-  var cityController = TextEditingController(text: 'asdasd');
-  var cepController = TextEditingController(text: '123123');
+  var cityController = TextEditingController();
+  var cepController = TextEditingController();
 
   @override
   void initState() {
