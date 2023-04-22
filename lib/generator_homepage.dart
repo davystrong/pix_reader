@@ -63,16 +63,16 @@ class PixEditor extends ConsumerStatefulWidget {
 }
 
 class _PixEditorState extends ConsumerState<PixEditor> {
-  var formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
 
-  var pixCodeController = TextEditingController();
-  var pixIdController = TextEditingController();
-  var valueController = MoneyMaskedTextController(leftSymbol: 'R\$ ');
-  var nameController = TextEditingController();
-  var referenceLabelController = TextEditingController();
-  var messageController = TextEditingController();
-  var cityController = TextEditingController();
-  var cepController = TextEditingController();
+  final pixCodeController = TextEditingController();
+  final pixIdController = TextEditingController();
+  final valueController = MoneyMaskedTextController(leftSymbol: 'R\$ ');
+  final nameController = TextEditingController();
+  final referenceLabelController = TextEditingController();
+  final messageController = TextEditingController();
+  final cityController = TextEditingController();
+  final cepController = TextEditingController();
 
   @override
   void initState() {
@@ -87,7 +87,10 @@ class _PixEditorState extends ConsumerState<PixEditor> {
         if (pixIdController.text != pixCode.pixId) {
           pixIdController.text = pixCode.pixId;
         }
-        valueController.text = 'R\$ ${pixCode.value.toStringAsFixed(2)}';
+        final newValueText = 'R\$ ${(pixCode.value ?? 0).toStringAsFixed(2)}';
+        if (valueController.text != newValueText) {
+          valueController.text = newValueText;
+        }
         if (nameController.text != pixCode.name) {
           nameController.text = pixCode.name;
         }
@@ -101,7 +104,7 @@ class _PixEditorState extends ConsumerState<PixEditor> {
           cityController.text = pixCode.city;
         }
         if (cepController.text != pixCode.cep) {
-          cepController.text = pixCode.cep;
+          cepController.text = pixCode.cep ?? '';
         }
       }
     });
@@ -175,22 +178,16 @@ class _PixEditorState extends ConsumerState<PixEditor> {
               var cep = cepController.text.replaceAll(RegExp(r'[^0-9]'), '');
 
               if (pixIdController.text.isNotEmpty &&
-                  value > 0 &&
                   nameController.text.isNotEmpty &&
-                  city.isNotEmpty &&
-                  cep.isNotEmpty) {
+                  city.isNotEmpty) {
                 ref.read(pixCodeProvider.notifier).state = PixCode(
                   pixId: pixIdController.text,
                   value: value,
                   name: nameController.text,
                   city: city,
                   cep: cep,
-                  message: messageController.text.isEmpty
-                      ? null
-                      : messageController.text,
-                  referenceLabel: referenceLabelController.text.isEmpty
-                      ? null
-                      : referenceLabelController.text,
+                  message: messageController.text,
+                  referenceLabel: referenceLabelController.text,
                 );
               } else {
                 ref.read(pixCodeProvider.notifier).state = null;
@@ -246,6 +243,7 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  maxLength: 15,
                   controller: cityController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -261,6 +259,7 @@ class _PixEditorState extends ConsumerState<PixEditor> {
                 ),
                 const SizedBox(height: 8),
                 TextFormField(
+                  maxLength: 99,
                   controller: cepController,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
@@ -440,7 +439,7 @@ class _QrStickerState extends ConsumerState<QrSticker> {
                               ),
                             ),
                             Text(
-                              'R\$ ${pixCode?.value.toStringAsFixed(2)}',
+                              'R\$ ${(pixCode?.value ?? 0).toStringAsFixed(2)}',
                               style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 48,
@@ -571,7 +570,7 @@ class QrOverlay extends ConsumerWidget {
                                   part.isEmpty ? '' : part.substring(0, 1))
                           .toLowerCase();
                       String filename =
-                          'pix_${initials}_${pixCode.value.toStringAsFixed(2).replaceAll('.', '_')}.png';
+                          'pix_${initials}_${(pixCode.value ?? 0).toStringAsFixed(2).replaceAll('.', '_')}.png';
 
                       final image = await screenshotController.capture();
                       if (image != null) {

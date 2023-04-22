@@ -222,7 +222,7 @@ class PixCodeItem extends StatelessWidget {
       child: Card(
         elevation: accepted ? 0.5 : 6,
         child: ListTile(
-          title: Text('R\$ ${pixCode.value.toStringAsFixed(2)}'),
+          title: Text('R\$ ${(pixCode.value ?? 0).toStringAsFixed(2)}'),
           trailing: IconButton(
             icon: Icon(accepted
                 ? Icons.remove_shopping_cart

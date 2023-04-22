@@ -9,12 +9,12 @@ class InvalidPixCode implements Exception {}
 
 class PixCode {
   final String pixId;
-  final double value;
+  final double? value;
   final String name;
   final String referenceLabel;
   final String? message;
   final String city;
-  final String cep;
+  final String? cep;
 
   static String _generateRandomString(int len) {
     var r = Random();
@@ -33,7 +33,7 @@ class PixCode {
     String? referenceLabel,
     String? message,
   })  : referenceLabel = referenceLabel == null || referenceLabel.isEmpty
-            ? _generateRandomString(20)
+            ? '***'
             : referenceLabel,
         message = message == null || message.isEmpty ? null : message;
 
@@ -77,17 +77,21 @@ class PixCode {
       nestedAccountInfo += '02${_stdLength(message!)}$message';
     }
     String nestedUID = '05${_stdLength(referenceLabel)}$referenceLabel';
-    String valueStr = value.toStringAsFixed(2);
     String output = '000201'
         '26${_stdLength(nestedAccountInfo)}$nestedAccountInfo'
         '52040000'
-        '5303986'
-        '54${_stdLength(valueStr)}$valueStr'
-        '5802BR'
+        '5303986';
+    if (value != null && value != 0) {
+      String valueStr = value!.toStringAsFixed(2);
+      output += '54${_stdLength(valueStr)}$valueStr';
+    }
+    output += '5802BR'
         '59${_stdLength(name)}$name'
-        '60${_stdLength(city)}$city'
-        '61${_stdLength(cep)}$cep'
-        '62${_stdLength(nestedUID)}$nestedUID'
+        '60${_stdLength(city)}$city';
+    if (cep != null && cep != '') {
+      output += '61${_stdLength(cep!)}$cep';
+    }
+    output += '62${_stdLength(nestedUID)}$nestedUID'
         '6304';
     output += _crc16(output).toRadixString(16).padLeft(4, '0').toUpperCase();
     return output;
@@ -108,8 +112,7 @@ class PixCode {
           !fields.containsKey(62) ||
           !fields.containsKey(54) ||
           !fields.containsKey(59) ||
-          !fields.containsKey(60) ||
-          !fields.containsKey(61)) {
+          !fields.containsKey(60)) {
         throw InvalidPixCode();
       }
       var nestedAccountInfo = _getFields(fields[26]!);
@@ -121,10 +124,10 @@ class PixCode {
       }
       return PixCode(
         pixId: nestedAccountInfo[1]!,
-        value: double.parse(fields[54]!),
+        value: double.tryParse(fields[54] ?? ''),
         name: fields[59]!,
         city: fields[60]!,
-        cep: fields[61]!,
+        cep: fields[61],
         referenceLabel: nestedUID[5]!,
         message: nestedAccountInfo[2],
       );
@@ -134,15 +137,15 @@ class PixCode {
   }
 
   PixCode operator +(PixCode rhs) {
-    if (name != rhs.name ||
-        pixId != rhs.pixId ||
-        city != rhs.city ||
-        cep != rhs.cep) {
-      throw IncompatiblePixCodes();
-    }
+    // if (name != rhs.name ||
+    //     pixId != rhs.pixId ||
+    //     city != rhs.city ||
+    //     cep != rhs.cep) {
+    //   throw IncompatiblePixCodes();
+    // }
     return PixCode(
       pixId: pixId,
-      value: value + rhs.value,
+      value: value ?? 0 + (rhs.value ?? 0),
       name: name,
       city: city,
       cep: cep,
