@@ -99,31 +99,35 @@ class PixCode {
   }
 
   factory PixCode.deserialise(String data) {
-    var fields = _getFields(data);
-    if (!fields.containsKey(26) ||
-        !fields.containsKey(62) ||
-        !fields.containsKey(54) ||
-        !fields.containsKey(59) ||
-        !fields.containsKey(60) ||
-        !fields.containsKey(61)) {
+    try {
+      var fields = _getFields(data);
+      if (!fields.containsKey(26) ||
+          !fields.containsKey(62) ||
+          !fields.containsKey(54) ||
+          !fields.containsKey(59) ||
+          !fields.containsKey(60) ||
+          !fields.containsKey(61)) {
+        throw InvalidPixCode();
+      }
+      var nestedAccountInfo = _getFields(fields[26]!);
+      var nestedUID = _getFields(fields[62]!);
+      if (!nestedAccountInfo.containsKey(1) ||
+          !nestedAccountInfo.containsKey(2) ||
+          !nestedUID.containsKey(5)) {
+        throw InvalidPixCode();
+      }
+      return PixCode(
+        pixId: nestedAccountInfo[1]!,
+        value: double.parse(fields[54]!),
+        name: fields[59]!,
+        city: fields[60]!,
+        cep: fields[61]!,
+        referenceLabel: nestedUID[5]!,
+        message: nestedAccountInfo[2],
+      );
+    } on FormatException {
       throw InvalidPixCode();
     }
-    var nestedAccountInfo = _getFields(fields[26]!);
-    var nestedUID = _getFields(fields[62]!);
-    if (!nestedAccountInfo.containsKey(1) ||
-        !nestedAccountInfo.containsKey(2) ||
-        !nestedUID.containsKey(5)) {
-      throw InvalidPixCode();
-    }
-    return PixCode(
-      pixId: nestedAccountInfo[1]!,
-      value: double.parse(fields[54]!),
-      name: fields[59]!,
-      city: fields[60]!,
-      cep: fields[61]!,
-      referenceLabel: nestedUID[5]!,
-      message: nestedAccountInfo[2],
-    );
   }
 
   @override

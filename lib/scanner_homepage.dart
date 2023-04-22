@@ -1,13 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:pix_reader/pix_code.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-class ScannerHomePage extends StatefulWidget {
+import 'main.dart';
+
+class ScannerHomePage extends ConsumerStatefulWidget {
   const ScannerHomePage({super.key});
 
   @override
-  State<ScannerHomePage> createState() => _ScannerHomePageState();
+  ConsumerState<ScannerHomePage> createState() => _ScannerHomePageState();
 }
 
 class ListItemPair {
@@ -17,7 +21,7 @@ class ListItemPair {
   ListItemPair(this.pixCode);
 }
 
-class _ScannerHomePageState extends State<ScannerHomePage> {
+class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
   List<ListItemPair> pixCodes = [];
   bool scanning = true;
   var listKey = GlobalKey<AnimatedListState>();
@@ -64,6 +68,14 @@ class _ScannerHomePageState extends State<ScannerHomePage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text('Pix Checkout'),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(appModeProvider.notifier).state = AppMode.generator;
+            },
+            icon: const Icon(Icons.qr_code_2),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -73,40 +85,44 @@ class _ScannerHomePageState extends State<ScannerHomePage> {
               aspectRatio: 1,
               child: Stack(
                 children: [
-                  MobileScanner(
-                    // fit: BoxFit.contain,
-                    onDetect: (capture) {
-                      if (scanning) {
-                        final List<Barcode> barcodes = capture.barcodes;
-                        try {
-                          var pixCode = barcodes.reversed
-                              .map((e) => e.rawValue)
-                              .nonNulls
-                              .map(PixCode.tryDeserialise)
-                              .nonNulls
-                              .firstOrNull;
-                          if (pixCode != null) {
-                            if (!(pixCodes.firstOrNull?.accepted ?? true)) {
-                              if (pixCode != pixCodes.first.pixCode) {
-                                var toRemove = pixCodes.removeAt(0);
-                                listKey.currentState?.removeItem(
-                                    0,
-                                    (context, animation) => buildListItem(
-                                        context, toRemove, animation));
+                  Transform.flip(
+                    flipX: defaultTargetPlatform == TargetPlatform.linux ||
+                        defaultTargetPlatform == TargetPlatform.macOS ||
+                        defaultTargetPlatform == TargetPlatform.windows,
+                    child: MobileScanner(
+                      onDetect: (capture) {
+                        if (scanning) {
+                          final List<Barcode> barcodes = capture.barcodes;
+                          try {
+                            final pixCode = barcodes.reversed
+                                .map((e) => e.rawValue)
+                                .nonNulls
+                                .map(PixCode.tryDeserialise)
+                                .nonNulls
+                                .firstOrNull;
+                            if (pixCode != null) {
+                              if (!(pixCodes.firstOrNull?.accepted ?? true)) {
+                                if (pixCode != pixCodes.first.pixCode) {
+                                  final toRemove = pixCodes.removeAt(0);
+                                  listKey.currentState?.removeItem(
+                                      0,
+                                      (context, animation) => buildListItem(
+                                          context, toRemove, animation));
+                                  pixCodes.insert(0, ListItemPair(pixCode));
+                                  listKey.currentState?.insertItem(0);
+                                }
+                              } else {
                                 pixCodes.insert(0, ListItemPair(pixCode));
                                 listKey.currentState?.insertItem(0);
                               }
-                            } else {
-                              pixCodes.insert(0, ListItemPair(pixCode));
-                              listKey.currentState?.insertItem(0);
+                              setState(() {});
                             }
-                            setState(() {});
+                          } on InvalidPixCode {
+                            // Ignore errors
                           }
-                        } on InvalidPixCode {
-                          // Ignore errors
                         }
-                      }
-                    },
+                      },
+                    ),
                   ),
                   AnimatedScale(
                     scale: scanning ? 0 : 1,
