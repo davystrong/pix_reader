@@ -9,7 +9,7 @@ jobs:
   tag:
     permissions: write-all
     outputs:
-      version: ${{ needs.tag.outputs.version }}
+      version: ${{ steps.get-version.outputs.version }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
