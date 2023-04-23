@@ -9,6 +9,7 @@ jobs:
   tag:
     permissions: write-all
     outputs:
+      tagname: ${{ steps.tag-release.outputs.tagname }}
       version: ${{ steps.get-version.outputs.version }}
     runs-on: ubuntu-latest
     steps:
@@ -66,6 +67,7 @@ jobs:
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{needs.tag.outputs.tagname}}
           files: |
             'build/macos/Build/Products/Release/Pix Reader ${{needs.tag.outputs.version}}.dmg'
   build-android:
@@ -90,5 +92,6 @@ jobs:
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{needs.tag.outputs.tagname}}
           files: |
             'build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk'
