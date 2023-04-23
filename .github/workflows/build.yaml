@@ -2,11 +2,32 @@ name: Build
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - main
 
 jobs:
+  tag:
+    permissions: write-all
+    outputs:
+      version: ${{ needs.tag.outputs.version }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Tag if new version
+        id: tag-release
+        uses: jacopocarlini/action-autotag@3.0.0
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "v"
+      - name: Get version
+        id: get-version
+        run: |
+          version=$(echo ${{  steps.tag-release.outputs.tagname }}" | cut -d 2-)
+          echo "::set-output name=version::$version"
   build-web:
+    needs: [tag]
+    if: needs.tag.outputs.version != ''
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -23,6 +44,8 @@ jobs:
         with:
           folder: build/web
   build-mac:
+    needs: [tag]
+    if: needs.tag.outputs.version != ''
     permissions: write-all
     runs-on: macos-latest
     steps:
@@ -40,17 +63,14 @@ jobs:
         run: npm install --global create-dmg
       - name: Create DMG
         run: create-dmg 'build/macos/Build/Products/Release/Pix Reader.app' 'build/macos/Build/Products/Release'
-      - name: Get version
-        id: get-version
-        run: |
-          version=$(echo ${{  github.ref_name }}" | cut -d 2-)
-          echo "::set-output name=version::$version"
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            'build/macos/Build/Products/Release/Pix Reader ${{steps.get-version.outputs.version}}.dmg'
+            'build/macos/Build/Products/Release/Pix Reader ${{needs.tag.outputs.version}}.dmg'
   build-android:
+    needs: [tag]
+    if: needs.tag.outputs.version != ''
     permissions: write-all
     runs-on: ubuntu-latest
     steps:
@@ -65,15 +85,10 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: "stable"
-      - name: Get version
-        id: get-version
-        run: |
-          version=$(echo ${{  github.ref_name }}" | cut -d 2-)
-          echo "::set-output name=version::$version"
       - name: Build
-        run: flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk 'build/app/outputs/flutter-apk/Pix Reader ${{steps.get-version.outputs.version}}.apk'
+        run: flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk 'build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk'
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
           files: |
-            'build/app/outputs/flutter-apk/Pix Reader ${{steps.get-version.outputs.version}}.apk'
+            'build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk'
