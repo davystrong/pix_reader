@@ -23,7 +23,7 @@ jobs:
       - name: Get version
         id: get-version
         run: |
-          version=$(echo ${{  steps.tag-release.outputs.tagname }}" | cut -d 2-)
+          version=$(echo "${{  steps.tag-release.outputs.tagname }}" | cut -d 2-)
           echo "::set-output name=version::$version"
   build-web:
     needs: [tag]
