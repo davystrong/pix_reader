@@ -63,7 +63,7 @@ jobs:
       - name: Install DMG creator
         run: npm install --global create-dmg
       - name: Create DMG
-        run: create-dmg 'build/macos/Build/Products/Release/Pix Reader.app' 'build/macos/Build/Products/Release'
+        run: create-dmg 'build/macos/Build/Products/Release/Pix Reader.app' 'build/macos/Build/Products/Release' || true
       - name: Publish
         uses: softprops/action-gh-release@v1
         with:
@@ -94,4 +94,4 @@ jobs:
         with:
           tag_name: ${{needs.tag.outputs.tagname}}
           files: |
-            'build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk'
+            build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk
