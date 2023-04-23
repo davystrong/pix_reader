@@ -39,7 +39,7 @@ jobs:
         with:
           channel: "master"
       - name: Build
-        run: flutter build web --web-renderer canvaskit --release --csp --no-tree-shake-icons --base-href "/pix_reader/"
+        run: flutter build web --web-renderer canvaskit --release --csp --base-href "/pix_reader/"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -69,7 +69,7 @@ jobs:
         with:
           tag_name: ${{needs.tag.outputs.tagname}}
           files: |
-            "build/macos/Build/Products/Release/Pix Reader ${{needs.tag.outputs.version}}.dmg"
+            build/macos/Build/Products/Release/Pix Reader ${{needs.tag.outputs.version}}.dmg
   build-android:
     needs: [tag]
     if: needs.tag.outputs.version != ''
@@ -94,4 +94,4 @@ jobs:
         with:
           tag_name: ${{needs.tag.outputs.tagname}}
           files: |
-            "build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk"
+            build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk
