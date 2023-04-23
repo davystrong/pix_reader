@@ -9,6 +9,7 @@ on:
 
 jobs:
   build-web:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,6 +25,7 @@ jobs:
         with:
           folder: build/web
   build-mac:
+    permissions: write-all
     runs-on: macos-latest
     steps:
       - name: Checkout
@@ -51,6 +53,7 @@ jobs:
           files: |
             'build/macos/Build/Products/Release/Pix Reader ${{steps.get-version.outputs.version}}.dmg'
   build-android:
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
