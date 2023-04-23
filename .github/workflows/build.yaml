@@ -38,7 +38,7 @@ jobs:
         with:
           channel: "master"
       - name: Build
-        run: flutter build web --web-renderer canvaskit --release --csp --base-href "/pix_reader/"
+        run: flutter build web --web-renderer canvaskit --release --csp --no-tree-shake-icons --base-href "/pix_reader/"
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
@@ -56,7 +56,7 @@ jobs:
         with:
           channel: "master"
       - name: Build
-        run: flutter config --enable-macos-desktop && flutter build --release
+        run: flutter config --enable-macos-desktop && flutter build macos --release
       - name: Setup Node.js
         uses: actions/setup-node@v3
       - name: Install DMG creator
