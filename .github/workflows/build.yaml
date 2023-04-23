@@ -36,7 +36,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: "master"
       - name: Build
         run: flutter build web --web-renderer canvaskit --release --csp --base-href "/pix_reader/"
       - name: Deploy
@@ -54,7 +54,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: "master"
       - name: Build
         run: flutter config --enable-macos-desktop && flutter build --release
       - name: Setup Node.js
@@ -84,7 +84,7 @@ jobs:
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          channel: "stable"
+          channel: "master"
       - name: Build
         run: flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk 'build/app/outputs/flutter-apk/Pix Reader ${{needs.tag.outputs.version}}.apk'
       - name: Publish
