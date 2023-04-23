@@ -1,0 +1,78 @@
+name: Build
+
+on:
+  workflow_dispatch:
+    -
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Build
+        run: flutter build web --web-renderer canvaskit --release --csp --base-href "/pix_reader/"
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: build/web
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Build
+        run: flutter config --enable-macos-desktop && flutter build --release
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+      - name: Install DMG creator
+        run: npm install --global create-dmg
+      - name: Create DMG
+        run: create-dmg 'build/macos/Build/Products/Release/Pix Reader.app' 'build/macos/Build/Products/Release'
+      - name: Get version
+        id: get-version
+        run: |
+          version=$(echo ${{  github.ref_name }}" | cut -d 2-)
+          echo "::set-output name=version::$version"
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            'build/macos/Build/Products/Release/Pix Reader ${{steps.get-version.outputs.version}}.dmg'
+  build-android:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: "zulu"
+          java-version: "11"
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+      - name: Get version
+        id: get-version
+        run: |
+          version=$(echo ${{  github.ref_name }}" | cut -d 2-)
+          echo "::set-output name=version::$version"
+      - name: Build
+        run: flutter build apk --release && mv build/app/outputs/flutter-apk/app-release.apk 'build/app/outputs/flutter-apk/Pix Reader ${{steps.get-version.outputs.version}}.apk'
+      - name: Publish
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            'build/app/outputs/flutter-apk/Pix Reader ${{steps.get-version.outputs.version}}.apk'
