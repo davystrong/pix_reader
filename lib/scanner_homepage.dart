@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:pix_reader/pix_code.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:pix_reader/qr_sticker.dart';
 
 import 'main.dart';
 
@@ -25,7 +25,7 @@ class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
   List<ListItemPair> pixCodes = [];
   bool scanning = true;
   var listKey = GlobalKey<AnimatedListState>();
-  String? qrCodeData;
+  PixCode? qrPixCode;
   bool active = false;
 
   Widget buildListItem(
@@ -57,11 +57,6 @@ class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
     );
   }
 
-  // Offset getQRPosition(Widget) {
-  //   var box = floatingActionButtonKey.currentContext?.findRenderObject() as RenderBox;
-  //   box.localto
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,15 +72,15 @@ class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
           ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          ConstrainedBox(
-            constraints: BoxConstraints.loose(const Size.square(400)),
-            child: AspectRatio(
-              aspectRatio: 1,
-              child: Stack(
-                children: [
-                  Transform.flip(
+          Column(
+            children: [
+              ConstrainedBox(
+                constraints: BoxConstraints.loose(const Size.square(400)),
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: Transform.flip(
                     flipX: defaultTargetPlatform == TargetPlatform.linux ||
                         defaultTargetPlatform == TargetPlatform.macOS ||
                         defaultTargetPlatform == TargetPlatform.windows,
@@ -124,38 +119,36 @@ class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
                       },
                     ),
                   ),
-                  AnimatedScale(
-                    scale: scanning ? 0 : 1,
-                    duration: const Duration(milliseconds: 200),
-                    onEnd: () {
-                      if (scanning) {
-                        qrCodeData = null;
-                      }
-                    },
-                    child: qrCodeData == null
-                        ? Container()
-                        : Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Material(
-                              borderRadius: BorderRadius.circular(5),
-                              elevation: 5,
-                              child: QrImage(
-                                data: qrCodeData!,
-                              ),
-                            ),
-                          ),
-                  ),
-                ],
+                ),
               ),
-            ),
+              Expanded(
+                child: Material(
+                  child: AnimatedList(
+                    key: listKey,
+                    initialItemCount: 0,
+                    itemBuilder: (context, index, animation) => buildListItem(
+                        context, pixCodes[index], animation, index),
+                  ),
+                ),
+              ),
+            ],
           ),
-          Expanded(
-            child: Material(
-              child: AnimatedList(
-                key: listKey,
-                initialItemCount: 0,
-                itemBuilder: (context, index, animation) =>
-                    buildListItem(context, pixCodes[index], animation, index),
+          Align(
+            alignment: Alignment.topCenter,
+            child: AnimatedScale(
+              scale: scanning ? 0 : 1,
+              duration: const Duration(milliseconds: 200),
+              onEnd: () {
+                if (scanning) {
+                  qrPixCode = null;
+                }
+              },
+              child: Card(
+                surfaceTintColor: Colors.white,
+                elevation: 5,
+                child: QrSticker(
+                  pixCode: qrPixCode,
+                ),
               ),
             ),
           ),
@@ -166,11 +159,10 @@ class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
               onPressed: () {
                 if (scanning) {
                   scanning = false;
-                  qrCodeData = pixCodes
+                  qrPixCode = pixCodes
                       .map((e) => e.accepted ? e.pixCode : null)
                       .nonNulls
-                      .reduce((value, element) => value + element)
-                      .serialise();
+                      .reduce((value, element) => value + element);
 
                   if (!(pixCodes.firstOrNull?.accepted ?? true)) {
                     var toRemove = pixCodes.removeAt(0);

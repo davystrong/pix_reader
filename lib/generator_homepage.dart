@@ -13,7 +13,7 @@ import 'package:pasteboard/pasteboard.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pix_reader/ans_formatter.dart';
 import 'package:pix_reader/pix_code.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+import 'package:pix_reader/qr_sticker.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -48,7 +48,7 @@ class _GeneratorHomePageState extends ConsumerState<GeneratorHomePage> {
       body: ListView(
         children: const [
           Center(
-            child: QrSticker(),
+            child: InteractiveQrSticker(),
           ),
           PixEditor(),
         ],
@@ -387,14 +387,15 @@ class FadePainter extends CustomPainter {
   }
 }
 
-class QrSticker extends ConsumerStatefulWidget {
-  const QrSticker({super.key});
+class InteractiveQrSticker extends ConsumerStatefulWidget {
+  const InteractiveQrSticker({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _QrStickerState();
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      _InteractiveQrStickerState();
 }
 
-class _QrStickerState extends ConsumerState<QrSticker> {
+class _InteractiveQrStickerState extends ConsumerState<InteractiveQrSticker> {
   ScreenshotController screenshotController = ScreenshotController();
   bool showSave = false;
   bool hovering = false;
@@ -439,34 +440,10 @@ class _QrStickerState extends ConsumerState<QrSticker> {
                 child: Stack(
                   alignment: Alignment.bottomRight,
                   children: [
-                    ConstrainedBox(
-                      constraints:
-                          BoxConstraints.loose(const Size.fromWidth(300)),
-                      child: Screenshot(
-                        controller: screenshotController,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-                              child: FittedBox(
-                                child: QrImage(
-                                  data: pixCode?.serialise() ?? 'none',
-                                  padding: EdgeInsets.zero,
-                                  size: 300,
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'R\$ ${(pixCode?.value ?? 0).toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 48,
-                              ),
-                            ),
-                          ],
-                        ),
+                    Screenshot(
+                      controller: screenshotController,
+                      child: QrSticker(
+                        pixCode: pixCode,
                       ),
                     ),
                     Align(
