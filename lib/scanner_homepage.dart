@@ -165,11 +165,11 @@ class _ScannerHomePageState extends ConsumerState<ScannerHomePage> {
                       .reduce((value, element) => value + element);
 
                   if (!(pixCodes.firstOrNull?.accepted ?? true)) {
-                    var toRemove = pixCodes.removeAt(0);
                     listKey.currentState?.removeItem(
                         0,
                         (context, animation) =>
-                            buildListItem(context, toRemove, animation));
+                            buildListItem(context, pixCodes[0], animation));
+                    pixCodes.removeAt(0);
                   }
                 } else {
                   scanning = true;
