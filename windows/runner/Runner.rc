@@ -89,11 +89,11 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.example" "\0"
+            VALUE "CompanyName", "com.davystrong" "\0"
             VALUE "FileDescription", "pix_reader" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "pix_reader" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.davystrong. All rights reserved." "\0"
             VALUE "OriginalFilename", "pix_reader.exe" "\0"
             VALUE "ProductName", "pix_reader" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
