@@ -145,7 +145,7 @@ class PixCode {
     // }
     return PixCode(
       pixId: pixId,
-      value: value ?? 0 + (rhs.value ?? 0),
+      value: (value ?? 0) + (rhs.value ?? 0),
       name: name,
       city: city,
       cep: cep,
